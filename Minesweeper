@@ -30,3 +30,20 @@ DIFICULTADES = {
     "super_pro": (24, 24, 99)
 }
 
+#Crear cuadricula yay
+
+def crear_cuadricula(fila, col):
+    return [[0 for _ in range(col)] for _ in range(fila)]
+
+def colocar_minas(cuadricula, fila, col, num_minas):
+    minas_colocadas = 0
+    while minas_colocadas < num_minas:
+        x = random.randint(0, fila - 1)
+        y = random.randint(0, col - 1)
+        if cuadricula[x][y] == 0:
+            cuadricula[x][y] = -1
+            minas_colocadas += 1
+            for i in range(max(0, x - 1), min(fila, x + 2)):
+                for j in range(max(0, y - 1), min(col, y + 2)):
+                    if cuadricula[i][j] != -1:
+                        cuadricula[i][j] += 1
