@@ -95,3 +95,28 @@ def descubrir_celda(cuadricula, fila, col, x, y):
         for i in range(max(0, x - 1), min(fila, x + 2)):
             for j in range(max(0, y, -1), min(col, y +2)):
                 descubrir_celda(cuadricula, fila, col, i, j)
+
+def pantalla_inicio():
+    ventana.fill(NEGRO)
+    font = pygame.font.Font(None, 36)
+    texto = font.render('Seleccione la Dificultad', True, BLANCO)
+    ventana.blit(texto, (ANCHO_VENTANA // 2 - texto.get_width() // 2, ALTO_VENTANA // 4))
+    botones = []
+    for idx, dificultad in enumerate(DIFICULTADES.keys()):
+        rect = pygame.Rect(ANCHO_VENTANA // 2 - 75, ALTO_VENTANA // 2 + idx * 50, 150, 40)
+        pygame.draw.rect(ventana, GRIS, rect)
+        texto = font.render(dificultad, True, NEGRO)
+        ventana.blit(texto, (rect.x + (rect.width()) // 2, rect.y + (rect.height - texto.get_height()) // 2))
+        botones.append((rect, dificultad))
+
+    pygame. display.flip()
+    return botones
+
+def pantalla_final(mensaje):
+    ventana.fill(NEGRO)
+    font = pygame.font.Font(None, 36)
+    texto = font.render(mensaje, True, BLANCO)
+    ventana.blit(texto, (ANCHO_VENTANA // 2 - texto.get_width() // 2, ALTO_VENTANA // 2))
+    pygame.display.flip()
+    pygame.time.wait(3000)
+    
